@@ -25,10 +25,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(helmet());
 app.use(morgan("dev"));
 
-// app.use("/", indexRoute);
-app.use("/auth", authRoute);
-// app.use("/users", userRoute);
-// app.use("/posts", postRoute);
+app.use("/api/", indexRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);
 
 
 app.get('/', (req, res) => {
@@ -42,7 +42,9 @@ app.get('*', (req, res) => {
 if(process.env.NODE_ENV === "production"){
     app.use(express.static("frontend/build"))
     app.get("*",(req,res)=>{
-        res.sendFile(path.resolve(__dirname,"frontend","build","index.html"))
+        let abc = path.resolve(__dirname,"frontend","build","index.html")
+        console.log(abc);
+        res.sendFile(abc)
     })
 }
 
